@@ -1,42 +1,43 @@
 <html>
-<head>
-	<style>
-		#char {
-			font-size: 70px;
-		}
-	</style>
+	<head>
+		<style>
+			#char {
+				font-size: 70px;
+			}	
+		</style>
 
-  <script>
-		var letterWeights = {
-			2:["Q","X","Z"],
-			6:["A", "I", "N", "O", "R", "S", "T", "*"],
-			4:["B","G", "P", "W", "Y", "C", "F", "M", "U", "D", "H","L", "J", "K", "V"],
-			8:["E","H","L"]
-		}
-		function getLetterPool(){
-			var pool = [];
-			for(var i in letterWeights) {
-				for(var j = 0; j < letterWeights[i].length; j++){
-					for(var k = 0; k < i; k++){
-						pool.push(letterWeights[i][j]);
+ 		<script>
+			var letterWeights = {
+				2:["Q","X","Z"],
+				6:["A", "I", "N", "O", "R", "S", "T", "*"],
+				4:["B","G", "P", "W", "Y", "C", "F", "M", "U", "D", "H","L", "J", "K", "V"],
+				8:["E","H","L"]
+			}
+			
+			function getLetterPool(){
+				var pool = [];
+				for(var i in letterWeights) {
+					for(var j = 0; j < letterWeights[i].length; j++){
+						for(var k = 0; k < i; k++){
+							pool.push(letterWeights[i][j]);
+						}
 					}
 				}
+				return pool;
 			}
-			return pool;
-		}
-
-		function rollLetter(){
-			var pool = getLetterPool();
-			var draw = Math.floor(Math.random() * pool.length);
-			var letter = pool.splice(draw, 1);
-			document.getElementById("char").innerHTML += letter + " ";
-		};
-  </script>
-</head>
-  <body>
-    <button onClick="rollLetter()">ROLL</button>
+	
+			function rollLetter(){
+				var pool = getLetterPool();
+				var draw = Math.floor(Math.random() * pool.length);
+				var letter = pool.splice(draw, 1);
+				document.getElementById("char").innerHTML += letter + " ";
+			};
+			
+  	</script>
+	</head>
+	<body>
+		<button onClick="rollLetter()">ROLL</button>
 		<div id="char"> </div>
-
-  </body>
+	</body>
 </html>
 
