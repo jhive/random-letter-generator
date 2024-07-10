@@ -3,17 +3,18 @@
 		<style>
 			#char {
 				font-size: 70px;
-			}	
+			}
 		</style>
 
- 		<script>
+		<script>
+			var pool;
 			var letterWeights = {
 				2:["Q","X","Z"],
-				6:["A", "I", "N", "O", "R", "S", "T", "*"],
 				4:["B","G", "P", "W", "Y", "C", "F", "M", "U", "D", "H","L", "J", "K", "V"],
+				6:["A", "I", "N", "O", "R", "S", "T", "*"],
 				8:["E","H","L"]
 			}
-			
+      
 			function getLetterPool(){
 				var pool = [];
 				for(var i in letterWeights) {
@@ -25,19 +26,28 @@
 				}
 				return pool;
 			}
-	
+
+			function reset(){
+				document.getElementById("char").innerHTML =" ";
+				this.pool = getLetterPool();
+			}
+
 			function rollLetter(){
-				var pool = getLetterPool();
-				var draw = Math.floor(Math.random() * pool.length);
-				var letter = pool.splice(draw, 1);
+				console.log("Letters in pool: ", this.pool.length);
+				var draw = Math.floor(Math.random() * this.pool.length);
+				var letter = this.pool.splice(draw, 1);
 				document.getElementById("char").innerHTML += letter + " ";
+				console.log("Letters remaining after draw: ", this.pool.length);
 			};
-			
-  	</script>
+
+			pool = getLetterPool();
+
+		</script>
 	</head>
-	<body>
-		<button onClick="rollLetter()">ROLL</button>
+  <body>
+    <button onClick="rollLetter()">DRAW</button>
+		<button onClick="reset()">RESET</button>
 		<div id="char"> </div>
-	</body>
+  </body>
 </html>
 
